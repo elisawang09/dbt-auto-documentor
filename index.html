@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Model Documentation Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto p-4">
+        <!-- Header -->
+        <header class="mb-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Data Model Documentation</h1>
+                <div class="flex space-x-2">
+                    <button id="exportButton" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                        Export Documentation
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Initial Message -->
+        <div id="initialMessage" class="text-center py-16">
+            <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Welcome to Data Model Documentation Tool</h2>
+                <p class="text-gray-600 mb-6">Import your data models to get started with documentation.</p>
+                <label class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700">
+                    Import Models
+                    <input type="file" id="fileInput" class="hidden" accept=".json">
+                </label>
+            </div>
+        </div>
+
+        <!-- Loading Message -->
+        <div id="loadingMessage" class="text-center py-16 hidden">
+            <div class="inline-block">
+                <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="mt-2 text-gray-600">Loading models...</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="appContent" class="hidden">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Sidebar -->
+                <div class="w-full md:w-1/3 lg:w-1/4">
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="mb-4">
+                            <input id="searchInput" type="text" placeholder="Search models..."
+                                class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div id="modelsList" class="max-h-[calc(100vh-200px)] overflow-y-auto">
+                            <!-- Models list will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="w-full md:w-2/3 lg:w-3/4">
+                    <div id="modelDetails" class="bg-white rounded-lg shadow p-6">
+                        <!-- Model details will be rendered here -->
+                        <div class="text-center text-gray-500 p-10">
+                            Select a model to view details
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/models.js"></script>
+    <script src="js/openai-service.js"></script>
+    <script src="js/chat-ui.js"></script>
+    <script src="js/modal-manager.js"></script>
+    <script src="js/description-editor.js"></script>
+    <script src="js/batch-generator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

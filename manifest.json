@@ -1,0 +1,598 @@
+{
+    "metadata": {
+      "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v9.json",
+      "dbt_version": "1.5.2",
+      "generated_at": "2023-11-09T09:31:56.632787Z",
+      "invocation_id": "56be43f0-118d-4a47-b391-af96c53efab6",
+      "env": {},
+      "project_id": "909ba4ad2bda46b10aac3c5b7f01abd5",
+      "user_id": null,
+      "send_anonymous_usage_stats": true,
+      "adapter_type": "bigquery"
+    },
+    "nodes": {
+      "model.arc.batch__job_candidate_by_source_and_review": {
+        "database": "codementor-warehouse-184604",
+        "schema": "dbt_staging",
+        "name": "batch__job_candidate_by_source_and_review",
+        "resource_type": "model",
+        "package_name": "arc",
+        "path": "marts/batch/batch__job_candidate_by_source_and_review.sql",
+        "original_file_path": "models/marts/batch/batch__job_candidate_by_source_and_review.sql",
+        "unique_id": "model.arc.batch__job_candidate_by_source_and_review",
+        "fqn": [
+          "arc",
+          "marts",
+          "batch",
+          "batch__job_candidate_by_source_and_review"
+        ],
+        "alias": "batch__job_candidate_by_source_and_review",
+        "checksum": {
+          "name": "sha256",
+          "checksum": "5d231409366588b256f090bf8b4fe8855a652e2f57f8d4c053d49efaec04aa8b"
+        },
+        "config": {
+          "enabled": true,
+          "alias": null,
+          "schema": null,
+          "database": null,
+          "tags": [
+            "released"
+          ],
+          "meta": {},
+          "group": null,
+          "materialized": "table",
+          "incremental_strategy": null,
+          "persist_docs": {},
+          "quoting": {},
+          "column_types": {},
+          "full_refresh": null,
+          "unique_key": null,
+          "on_schema_change": "ignore",
+          "grants": {},
+          "packages": [],
+          "docs": {
+            "show": true,
+            "node_color": null
+          },
+          "contract": {
+            "enforced": false
+          },
+          "post-hook": [],
+          "pre-hook": []
+        },
+        "tags": [
+          "released"
+        ],
+        "description": "Batch job candidate and their review results",
+        "columns": {
+          "job_candidate_key": {
+            "name": "job_candidate_key",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "user_id": {
+            "name": "user_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "developer_id": {
+            "name": "developer_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "team_id": {
+            "name": "team_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "job_request_id": {
+            "name": "job_request_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "candidate_source": {
+            "name": "candidate_source",
+            "description": "\"Where are the candidates from, options: recruiter_picks,top_applicants, ai_sourcing, batch_recommendation, others.\nPlease refer to the [product update](https://codementor.slack.com/archives/C0530LM9G57/p1694185280032499) for the criteria of each option.\"",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "is_from_shortlist": {
+            "name": "is_from_shortlist",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "candidate_score": {
+            "name": "candidate_score",
+            "description": "If the job_candidate is from Recruiter's picks, the score will be all 95. Otherwise, it means the ai-calculated score based on job post detail and developer's profile.",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "score_passes_threshold": {
+            "name": "score_passes_threshold",
+            "description": "score_passes_threshold will be marked as True for a job if the matching score (job candidate score) pass the threshold.",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "batch_id": {
+            "name": "batch_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "item_created_at": {
+            "name": "item_created_at",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_reviewed_candidate_type": {
+            "name": "first_reviewed_candidate_type",
+            "description": "Decisions that client made for the candidates, options: ivr, not_interested, like",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_candidate_rejection_reasons": {
+            "name": "first_candidate_rejection_reasons",
+            "description": "Reason of rejection: timezone, tech_stacks, salary, seniority, other",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_candidate_rejection_other_reason": {
+            "name": "first_candidate_rejection_other_reason",
+            "description": "Detailed reasons for the rejection which choose 'other' as the reason type",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_reviewed_candidate_at": {
+            "name": "first_reviewed_candidate_at",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_viewed_candidate_at": {
+            "name": "first_viewed_candidate_at",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "has_viewed_candidate": {
+            "name": "has_viewed_candidate",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          }
+        },
+        "meta": {},
+        "group": null,
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "patch_path": "arc://models/marts/batch/_batch__models.yml",
+        "build_path": null,
+        "deferred": false,
+        "unrendered_config": {
+          "materialized": "table",
+          "tags": [
+            "released"
+          ]
+        },
+        "created_at": 1699520675.573007,
+        "relation_name": "`codementor-warehouse-184604`.`dbt_staging`.`batch__job_candidate_by_source_and_review`",
+        "raw_code": "SELECT\n    candidate.job_candidate_key\n    , candidate.user_id\n    , candidate.developer_id\n    , candidate.team_id\n    , candidate.job_request_id\n    , candidate.source AS candidate_source\n    , candidate.score AS candidate_score\n    , candidate.is_from_shortlist\n    , candidate.score_passes_threshold\n    , candidate.batch_id\n    , candidate.item_created_at\n    , candidate.model_version\n    , IF(review_stats.ivr_count > 0, TRUE, FALSE) AS has_ivr\n    , CASE\n        WHEN review_stats.liked_count > 0 THEN 'like'\n        WHEN review_stats.not_interested_count > 0 THEN 'not_interested'\n        ELSE NULL END AS client_feedback\n    , IF(review_stats.ivr_count + review_stats.not_interested_count + review_stats.liked_count  > 0, TRUE, FALSE) AS has_reviewed\n    , IF(client_rejected_count > 1, TRUE, FALSE) AS client_rejected_after_interview\n    , review_stats.candidate_rejection_reasons\n    , review_stats.candidate_rejection_other_reason\n    , review_stats.first_reviewed_candidate_at\n    , review_stats.first_viewed_candidate_at\n    , review_stats.first_viewed_candidate_at IS NOT NULL AS has_viewed_candidate\nFROM {{ ref(\"int_batch__job_candidate_by_source\") }} AS candidate\nLEFT JOIN {{ ref(\"int_batch__job_candidate_by_source_and_review\") }} AS review_stats\nUSING (job_candidate_key)\n-- exclude spam account's candidates\nWHERE job_candidate_key IS NOT NULL",
+        "language": "sql",
+        "refs": [
+          {
+            "name": "int_batch__job_candidate_by_source",
+            "package": null,
+            "version": null
+          },
+          {
+            "name": "int_batch__job_candidate_by_source_and_review",
+            "package": null,
+            "version": null
+          }
+        ],
+        "sources": [],
+        "metrics": [],
+        "depends_on": {
+          "macros": [
+            "macro.arc.ref"
+          ],
+          "nodes": [
+            "model.arc.int_batch__job_candidate_by_source",
+            "model.arc.int_batch__job_candidate_by_source_and_review"
+          ]
+        },
+        "compiled_path": null,
+        "contract": {
+          "enforced": false,
+          "checksum": null
+        },
+        "access": "protected",
+        "constraints": [],
+        "version": null,
+        "latest_version": null
+      },
+
+      "model.arc.batch__company_info": {
+        "database": "codementor-warehouse-184604",
+        "schema": "dbt_staging",
+        "name": "batch__company_info",
+        "resource_type": "model",
+        "package_name": "arc",
+        "path": "marts/batch/batch__company_info.sql",
+        "original_file_path": "models/marts/batch/batch__company_info.sql",
+        "unique_id": "model.arc.batch__company_info",
+        "fqn": [
+          "arc",
+          "marts",
+          "batch",
+          "batch__company_info"
+        ],
+        "alias": "batch__company_info",
+        "checksum": {
+          "name": "sha256",
+          "checksum": "383fe120d6946d8bb55c8182389c13c969dc1de87b3de09ed4b8c4b7425910b5"
+        },
+        "config": {
+          "enabled": true,
+          "alias": null,
+          "schema": null,
+          "database": null,
+          "tags": [
+            "released"
+          ],
+          "meta": {},
+          "group": null,
+          "materialized": "table",
+          "incremental_strategy": null,
+          "persist_docs": {},
+          "quoting": {},
+          "column_types": {},
+          "full_refresh": null,
+          "unique_key": null,
+          "on_schema_change": "ignore",
+          "grants": {},
+          "packages": [],
+          "docs": {
+            "show": true,
+            "node_color": null
+          },
+          "contract": {
+            "enforced": false
+          },
+          "post-hook": [],
+          "pre-hook": []
+        },
+        "tags": [
+          "released"
+        ],
+        "description": "All companies that have joined batch",
+        "columns": {
+          "team_id": {
+            "name": "team_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "admin_owner": {
+            "name": "admin_owner",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_active_batch": {
+            "name": "first_active_batch",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "job_salary_range": {
+            "name": "job_salary_range",
+            "description": "The range between minimum salary and maximum salary among all of the job requests from the company.",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "job_disciplines": {
+            "name": "job_disciplines",
+            "description": "All of the job disciplines from the company's job reuqests",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "job_required_tech_stacks": {
+            "name": "job_required_tech_stacks",
+            "description": "All of the required job tech stacks from the company's job reuqests",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "job_required_regions": {
+            "name": "job_required_regions",
+            "description": "All of the required regions from the company's job reuqests",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          }
+        },
+        "meta": {},
+        "group": null,
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "patch_path": "arc://models/marts/batch/_batch__models.yml",
+        "build_path": null,
+        "deferred": false,
+        "unrendered_config": {
+          "materialized": "table",
+          "tags": [
+            "released"
+          ]
+        },
+        "created_at": 1699520675.5239522,
+        "relation_name": "`codementor-warehouse-184604`.`dbt_staging`.`batch__company_info`",
+        "raw_code": "WITH\n\ndistinct_batch_clients AS (\n  SELECT DISTINCT\n    team_id,\n    eligible_to,\n    first_joined_at,\n    first_joined_batch_id as first_active_batch,\n    subscribed_at,\n    can_sign_service_agreement,\n    has_signed_service_agreement,\n    is_puf_clients,\n    pioneer_company_profile_id,\n    company,\n    company_size,\n    investment_stage,\n    industries\n\n  FROM {{ref('batch__batch_clients')}}\n)\n\nSELECT\n    companies.*,\n    team_hs_records.team_hubspot_owner as admin_owner,\n    team_hs_records.has_entered_hs_onboarding_stage,\n    team_hs_records.first_entered_hs_onboarding_stage_at,\n    batch_company_jobs.total_job_posts,\n    batch_company_jobs.first_job_created_at,\n    batch_company_jobs.last_job_created_at,\n    batch_company_jobs.first_job_opened_at,\n    batch_company_jobs.last_job_opened_at,\n    batch_company_jobs.salary_range AS job_salary_range,\n    batch_company_jobs.disciplines AS job_disciplines,\n    batch_company_jobs.required_tech_stacks AS job_required_tech_stacks,\n    batch_company_jobs.required_regions AS job_required_regions\n\nFROM distinct_batch_clients as companies\nLEFT JOIN {{ref('stg_hubspot__hubspot_record_by_team')}} as team_hs_records USING (team_id)\nLEFT JOIN {{ref('int_batch__company_job_post_agg')}} as batch_company_jobs USING (team_id)",
+        "language": "sql",
+        "refs": [
+          {
+            "name": "batch__batch_clients",
+            "package": null,
+            "version": null
+          },
+          {
+            "name": "stg_hubspot__hubspot_record_by_team",
+            "package": null,
+            "version": null
+          },
+          {
+            "name": "int_batch__company_job_post_agg",
+            "package": null,
+            "version": null
+          }
+        ],
+        "sources": [],
+        "metrics": [],
+        "depends_on": {
+          "macros": [
+            "macro.arc.ref"
+          ],
+          "nodes": [
+            "model.arc.batch__batch_clients",
+            "model.arc.stg_hubspot__hubspot_record_by_team",
+            "model.arc.int_batch__company_job_post_agg"
+          ]
+        },
+        "compiled_path": null,
+        "contract": {
+          "enforced": false,
+          "checksum": null
+        },
+        "access": "protected",
+        "constraints": [],
+        "version": null,
+        "latest_version": null
+      },
+
+      "model.arc.batch__developer_info": {
+        "database": "codementor-warehouse-184604",
+        "schema": "dbt_staging",
+        "name": "batch__developer_info",
+        "resource_type": "model",
+        "package_name": "arc",
+        "path": "marts/batch/batch__developer_info.sql",
+        "original_file_path": "models/marts/batch/batch__developer_info.sql",
+        "unique_id": "model.arc.batch__developer_info",
+        "fqn": [
+          "arc",
+          "marts",
+          "batch",
+          "batch__developer_info"
+        ],
+        "alias": "batch__developer_info",
+        "checksum": {
+          "name": "sha256",
+          "checksum": "ae9ed7b22bb3ca292b24b4a5b4750a250aae1690d7c87cacb44e8dc6851ccb03"
+        },
+        "config": {
+          "enabled": true,
+          "alias": null,
+          "schema": null,
+          "database": null,
+          "tags": [],
+          "meta": {},
+          "group": null,
+          "materialized": "table",
+          "incremental_strategy": null,
+          "persist_docs": {},
+          "quoting": {},
+          "column_types": {},
+          "full_refresh": null,
+          "unique_key": null,
+          "on_schema_change": "ignore",
+          "grants": {},
+          "packages": [],
+          "docs": {
+            "show": true,
+            "node_color": null
+          },
+          "contract": {
+            "enforced": false
+          },
+          "post-hook": [],
+          "pre-hook": []
+        },
+        "tags": [],
+        "description": "All information about featured developers",
+        "columns": {
+          "developer_id": {
+            "name": "developer_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "application_created_at": {
+            "name": "application_created_at",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "first_featured_batch_id": {
+            "name": "first_featured_batch_id",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          },
+          "matcher": {
+            "name": "matcher",
+            "description": "",
+            "meta": {},
+            "data_type": null,
+            "constraints": [],
+            "quote": null,
+            "tags": []
+          }
+        },
+        "meta": {},
+        "group": null,
+        "docs": {
+          "show": true,
+          "node_color": null
+        },
+        "patch_path": "arc://models/marts/batch/_batch__models.yml",
+        "build_path": null,
+        "deferred": false,
+        "unrendered_config": {
+          "materialized": "table"
+        },
+        "created_at": 1699520675.539884,
+        "relation_name": "`codementor-warehouse-184604`.`dbt_staging`.`batch__developer_info`",
+        "raw_code": "WITH\n\ndev_info_about_batch AS (\n  SELECT DISTINCT\n    developer_id,\n    current_matcher as matcher,\n    first_featured_batch_id\n\n  FROM {{ref('stg_batch__developers')}}\n)\n\n, batch_dev_basic_info AS (\n  SELECT\n    developer_id,\n    name,\n    email,\n    region,\n    country,\n    discipline,\n    seniority,\n    COALESCE(top_tech_stacks, expertises_w_affinities) AS tech_stacks,\n    expected_annual_salary,\n    signed_up_at,\n    first_landing_referrer,\n    first_landing_referrer_group,\n    first_landing_url,\n    first_landing_url_group,\n    last_landing_before_signup_referrer,\n    last_landing_before_signup_referrer_group,\n    last_landing_before_signup_url,\n    last_landing_before_signup_url_group,\n    current_country,\n    current_region,\n    profile_country,\n    profile_region,\n    onboarding_created_at,\n    has_passed_freelancer_vetting,\n    has_passed_batch_vetting,\n    vetting_state\n\n  FROM {{ref('stg_dev__developer_info')}}\n  WHERE is_featured_developer IS TRUE\n)\n\nSELECT\n  batch_dev_basic_info.*,\n  dev_application.application_created_at,\n  dev_application.approved_at AS vetting_approved_at,\n  info_about_batch.matcher,\n  info_about_batch.first_featured_batch_id\n\n  -- TODO: Add vetting process info, 可能需要獨立的 staging model 處理\n  --     - name: passed_communi_assessment\n  --     - name: tech_assessment_state\n  --     - name: tech_assessment_type\n\nFROM batch_dev_basic_info\nLEFT JOIN {{ref('stg_dev__developer_applications')}} AS dev_application USING (developer_id)\nLEFT JOIN dev_info_about_batch AS info_about_batch USING (developer_id)",
+        "language": "sql",
+        "refs": [
+          {
+            "name": "stg_batch__developers",
+            "package": null,
+            "version": null
+          },
+          {
+            "name": "stg_dev__developer_info",
+            "package": null,
+            "version": null
+          },
+          {
+            "name": "stg_dev__developer_applications",
+            "package": null,
+            "version": null
+          }
+        ],
+        "sources": [],
+        "metrics": [],
+        "depends_on": {
+          "macros": [
+            "macro.arc.ref"
+          ],
+          "nodes": [
+            "model.arc.stg_batch__developers",
+            "model.arc.stg_dev__developer_info",
+            "model.arc.stg_dev__developer_applications"
+          ]
+        },
+        "compiled_path": null,
+        "contract": {
+          "enforced": false,
+          "checksum": null
+        },
+        "access": "protected",
+        "constraints": [],
+        "version": null,
+        "latest_version": null
+      }
+    }
+  }

@@ -1,0 +1,25 @@
+.model-card {
+    transition: all 0.3s ease;
+}
+.model-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.sidebar {
+    height: calc(100vh - 64px);
+}
+.main-content {
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+}
+.description-editor {
+    resize: vertical;
+    min-height: 100px;
+}
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+}
