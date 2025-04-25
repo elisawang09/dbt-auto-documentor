@@ -82,7 +82,7 @@ const ModalManager = {
                         <div class="mb-4">
                             <div class="flex space-x-2">
                                 <input id="userFeedback" type="text" class="flex-grow border rounded p-2"
-                                    placeholder="Provide feedback for next revision...">
+                                    placeholder="Provide feedback for next revision.">
                                 <button id="generateRevision" class="bg-blue-600 text-white px-4 rounded hover:bg-blue-700">
                                     AI Improve
                                 </button>
@@ -150,19 +150,11 @@ const ModalManager = {
                         <p id="batchModelDescription" class="text-sm text-gray-600 mb-4"></p>
 
                         <div class="mb-4">
-                            <label for="tableDescription" class="block text-sm font-medium text-gray-700 mb-2">
-                                What does this table do? (optional)
-                            </label>
-                            <textarea id="tableDescription" rows="3" class="w-full border rounded p-2"
-                                placeholder="Describe the purpose and function of this table..."></textarea>
-                        </div>
-
-                        <div class="mb-4">
                             <label for="batchBusinessContext" class="block text-sm font-medium text-gray-700 mb-2">
-                                Business Context
+                                Why does this table exist?
                             </label>
                             <textarea id="batchBusinessContext" rows="4" class="w-full border rounded p-2"
-                                placeholder="Provide business context to help generate accurate descriptions..."></textarea>
+                                placeholder="Please describe the business purpose and function of this table to help generate accurate descriptions..."></textarea>
                         </div>
                     </div>
 

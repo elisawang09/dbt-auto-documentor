@@ -10,13 +10,7 @@ const DescriptionEditor = {
      */
     initialize() {
         // Set up event listeners for the description editor modal
-        // document.getElementById('generateBtn').addEventListener('click', () => this.generateDescription());
         document.getElementById('generateRevision').addEventListener('click', () => this.generateRevision());
-        // document.getElementById('userFeedback').addEventListener('keypress', (e) => {
-        //     if (e.key === 'Enter') {
-        //         this.generateRevision();
-        //     }
-        // });
         document.getElementById('saveBtn').addEventListener('click', () => this.saveDescription());
 
         // Add event delegation for revision actions
@@ -71,7 +65,44 @@ const DescriptionEditor = {
     /**
      * Generate description using OpenAI
      */
-    generateDescription() {
+    // generateDescription() {
+    //     const columnName = document.getElementById('descriptionModal').getAttribute('data-column');
+    //     const modelName = ModelStore.currentModel.name;
+    //     const modelDescription = ModelStore.currentModel.description || '';
+    //     const businessContext = document.getElementById('businessContext').value;
+    //     const currentDescription = document.getElementById('currentDescriptionDisplay').textContent;
+
+    //     // Save business context for reuse
+    //     UI.businessContext = businessContext;
+
+    //     // Show loading indicator in the latest description field
+    //     document.getElementById('latestDescription').value = 'Generating...';
+
+    //     // Call OpenAI API
+    //     OpenAIService.generateRefinedDescription(columnName, modelName, modelDescription, businessContext, currentDescription, '')
+    //         .then(description => {
+    //             // Update latest description field
+    //             document.getElementById('latestDescription').value = description;
+
+    //             // Add to revisions history
+    //             this.revisions.push({
+    //                 description: description,
+    //                 source: 'Initial Generation'
+    //             });
+
+    //             // Update revisions list
+    //             this.renderRevisions();
+    //         })
+    //         .catch(error => {
+    //             // Show error
+    //             document.getElementById('latestDescription').value = 'Error: ' + (error.message || 'Failed to generate description');
+    //         });
+    // },
+
+    /**
+     * Generate a new revision based on user feedback
+     */
+    generateRevision() {
         const columnName = document.getElementById('descriptionModal').getAttribute('data-column');
         const modelName = ModelStore.currentModel.name;
         const modelDescription = ModelStore.currentModel.description || '';
@@ -81,34 +112,6 @@ const DescriptionEditor = {
         // Save business context for reuse
         UI.businessContext = businessContext;
 
-        // Show loading indicator in the latest description field
-        document.getElementById('latestDescription').value = 'Generating...';
-
-        // Call OpenAI API
-        OpenAIService.generateRefinedDescription(columnName, modelName, modelDescription, businessContext, currentDescription, '')
-            .then(description => {
-                // Update latest description field
-                document.getElementById('latestDescription').value = description;
-
-                // Add to revisions history
-                this.revisions.push({
-                    description: description,
-                    source: 'Initial Generation'
-                });
-
-                // Update revisions list
-                this.renderRevisions();
-            })
-            .catch(error => {
-                // Show error
-                document.getElementById('latestDescription').value = 'Error: ' + (error.message || 'Failed to generate description');
-            });
-    },
-
-    /**
-     * Generate a new revision based on user feedback
-     */
-    generateRevision() {
         const feedbackInput = document.getElementById('userFeedback');
         const feedback = feedbackInput.value.trim();
 
@@ -121,14 +124,17 @@ const DescriptionEditor = {
         document.getElementById('latestDescription').value = 'Generating...';
 
         // Call OpenAI API
-        OpenAIService.refineDescription(feedback)
-            .then(description => {
+        OpenAIService.generateRefinedDescription(columnName, modelName, modelDescription, businessContext, currentDescription, feedback)
+            .then(response => {
+                let descriptionsObject =  JSON.parse(response);
+                const revision = descriptionsObject[columnName]
+
                 // Update latest description field
-                document.getElementById('latestDescription').value = description;
+                document.getElementById('latestDescription').value = revision;
 
                 // Add to revisions history
                 this.revisions.push({
-                    description: description,
+                    description: revision,
                     source: 'Revision',
                     context: feedback
                 });

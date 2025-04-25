@@ -182,37 +182,39 @@ Follow these guidelines:
      * @param {string} message - User message
      * @returns {Promise<string>} - Refined description
      */
-    async refineDescription(message) {
-        if (!this.apiKey) {
-            throw new Error('OpenAI API key is not set. Please set it in the settings.');
-        }
+    // async refineDescription(message) {
+    //     if (!this.apiKey) {
+    //         throw new Error('OpenAI API key is not set. Please set it in the settings.');
+    //     }
 
-        if (this.conversationHistory.length === 0) {
-            throw new Error('No conversation history found. Please generate a description first.');
-        }
+    //     if (this.conversationHistory.length === 0) {
+    //         throw new Error('No conversation history found. Please generate a description first.');
+    //     }
 
-        // Add user message to conversation history
-        this.conversationHistory.push({
-            role: 'user',
-            content: message
-        });
+    //     // Add user message to conversation history
+    //     this.conversationHistory.push({
+    //         role: 'user',
+    //         content: message
+    //     });
 
-        try {
-            // Call OpenAI API with the updated conversation history
-            const response = await this.callOpenAI(this.conversationHistory);
+    //     console.log(this.conversationHistory);
 
-            // Extract assistant message
-            const assistantMessage = response.choices[0].message;
+    //     try {
+    //         // Call OpenAI API with the updated conversation history
+    //         const response = await this.callOpenAI(this.conversationHistory);
 
-            // Add response to conversation history
-            this.conversationHistory.push(assistantMessage);
+    //         // Extract assistant message
+    //         const assistantMessage = response.choices[0].message;
 
-            return assistantMessage.content;
-        } catch (error) {
-            console.error('Error refining description:', error);
-            throw new Error(error.message || 'Failed to refine description');
-        }
-    },
+    //         // Add response to conversation history
+    //         this.conversationHistory.push(assistantMessage);
+
+    //         return assistantMessage.content;
+    //     } catch (error) {
+    //         console.error('Error refining description:', error);
+    //         throw new Error(error.message || 'Failed to refine description');
+    //     }
+    // },
 
     /**
      * Call OpenAI API

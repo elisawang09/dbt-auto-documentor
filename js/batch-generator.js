@@ -19,7 +19,6 @@ const BatchGenerator = {
         // Set modal content
         document.getElementById('batchModelName').textContent = model.name;
         document.getElementById('batchModelDescription').textContent = model.description || 'No description provided';
-        document.getElementById('tableDescription').value = model.description || '';
         document.getElementById('batchBusinessContext').value = UI.businessContext || '';
 
         // Hide progress section
@@ -34,6 +33,7 @@ const BatchGenerator = {
      */
     async startBatchGeneration() {
         const model = ModelStore.currentModel;
+        const tableDescription = model.description
         const columns = model.columns || {};
         const columnsWithoutDescription = Object.values(columns).filter(column => !column.description);
 
@@ -44,16 +44,15 @@ const BatchGenerator = {
         }
 
         // Get user input
-        const tableDescription = document.getElementById('tableDescription').value.trim();
         const businessContext = document.getElementById('batchBusinessContext').value.trim();
 
         // Save business context for reuse
         UI.businessContext = businessContext;
 
         // Update model description if provided
-        if (tableDescription && tableDescription !== model.description) {
-            ModelStore.updateModelDescription(tableDescription);
-        }
+        // if (tableDescription && tableDescription !== model.description) {
+        //     ModelStore.updateModelDescription(tableDescription);
+        // }
 
         // Show progress section
         const progressCounter = document.getElementById('progressCounter');
@@ -118,7 +117,7 @@ const BatchGenerator = {
             setTimeout(() => {
                 ModalManager.closeModal('batchModal');
                 alert('All descriptions generated successfully!');
-            }, 1000);
+            }, 5000);
         } catch (error) {
             alert(`Error generating descriptions: ${error.message}`);
 
