@@ -68,27 +68,47 @@ const BatchGenerator = {
         document.getElementById('cancelBatchBtn').disabled = true;
         document.getElementById('cancelBatchBtn').classList.add('opacity-50');
 
-        // Process columns
-        let completedCount = 0;
-
         try {
+            // Extract column names for the request
+            const columnNames = columnsWithoutDescription.map(column => column.name);
+
+            // Generate descriptions for all columns in a single request
+            const response = await OpenAIService.generateDescription(
+                columnNames,
+                model.name,
+                tableDescription || model.description || '',
+                businessContext,
+                ''
+            );
+
+            // Parse the JSON response
+            let descriptionsObject;
+            try {
+                // Try to parse the response directly
+                descriptionsObject = JSON.parse(response);
+            } catch (parseError) {
+                // If direct parsing fails, try to extract JSON from the text
+                const jsonMatch = response.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    descriptionsObject = JSON.parse(jsonMatch[0]);
+                } else {
+                    throw new Error('Could not parse the AI response as JSON');
+                }
+            }
+
+            // Update column descriptions from the response
+            let completedCount = 0;
+
             for (const column of columnsWithoutDescription) {
-                // Generate description
-                const description = await OpenAIService.generateDescription(
-                    column.name,
-                    model.name,
-                    tableDescription || model.description || '',
-                    businessContext,
-                    ''
-                );
+                if (descriptionsObject[column.name]) {
+                    // Update column description
+                    ModelStore.updateColumnDescription(column.name, descriptionsObject[column.name]);
 
-                // Update column description
-                ModelStore.updateColumnDescription(column.name, description);
-
-                // Update progress
-                completedCount++;
-                progressCounter.textContent = `${completedCount}/${columnsWithoutDescription.length}`;
-                progressBar.style.width = `${(completedCount / columnsWithoutDescription.length) * 100}%`;
+                    // Update progress
+                    completedCount++;
+                    progressCounter.textContent = `${completedCount}/${columnsWithoutDescription.length}`;
+                    progressBar.style.width = `${(completedCount / columnsWithoutDescription.length) * 100}%`;
+                }
             }
 
             // Re-render model details to show updated descriptions
