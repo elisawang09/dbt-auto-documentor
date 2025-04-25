@@ -61,11 +61,6 @@ const DescriptionEditor = {
         // Show modal
         ModalManager.showModal('descriptionModal');
     },
-
-    /**
-     * Generate description using OpenAI
-     */
-    // generateDescription() {
     //     const columnName = document.getElementById('descriptionModal').getAttribute('data-column');
     //     const modelName = ModelStore.currentModel.name;
     //     const modelDescription = ModelStore.currentModel.description || '';
