@@ -1,6 +1,6 @@
 # DocuSense
 
-A web-based tool for auto generating column descriptions based on dbt manifest.json files.
+A web-based tool for auto generating column descriptions with business context included.
 
 ## Features
 
@@ -13,11 +13,21 @@ A web-based tool for auto generating column descriptions based on dbt manifest.j
 ## Usage
 1. Clone the repo to your local enviroment.
 2. Open `index.html` in your web browser
-3. Click "Import Model" and select the manifest.json file
+3. Click "Import Model" and select the `manifest.json` file in the repo folder 
 4. Browse models in the sidebar or click on a model to view its details
 5. Create descriptions by "Generate All Descriptions"
 6. Edit column descriptions and click "Save" for each change
 7. When finished, click "Export" to download the updated manifest file
+
+## API Key Setup
+
+This application requires an OpenAI API key to function. Follow these steps to configure your API key:
+
+1. Copy the file `api-config.example.js` as `api-config.js`
+2. Edit `api-config.js` and replace "your-api-key-here" with your actual OpenAI API key
+3. Save the file and reload the application
+
+Note: `api-config.js` is excluded from version control in `.gitignore` to prevent accidentally committing your API key to the repository.
 
 ## Dependencies
 
