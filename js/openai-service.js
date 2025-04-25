@@ -4,7 +4,7 @@
 
 const OpenAIService = {
     // API configuration
-    apiKey: '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',
+    apiKey: null,
     apiUrl: 'https://api.openai.com/v1/chat/completions',
     model: 'gpt-4.1',
     sysMsgContent: `You are an AI assistant specialized in writing clear, concise descriptions for database columns.
@@ -26,18 +26,24 @@ Follow these guidelines:
      * @param {string} apiKey - OpenAI API key
      */
     initialize(apiKey = null) {
-        this.apiKey = apiKey || localStorage.getItem('openai_api_key');
+        this.apiKey = apiKey ||
+                    localStorage.getItem('openai_api_key') ||
+                    this.getDefaultApiKey();
         // Reset conversation history
         this.conversationHistory = [];
     },
 
     /**
-     * Set API key
-     * @param {string} apiKey - OpenAI API key
+     * Get default API key from various sources
+     * Returns null if no key is found
      */
-    setApiKey(apiKey) {
-        this.apiKey = apiKey;
-        localStorage.setItem('openai_api_key', apiKey);
+    getDefaultApiKey() {
+        // Check if there's a global config object (which could be loaded from a separate file)
+        if (window.API_CONFIG && window.API_CONFIG.OPENAI_API_KEY) {
+            return window.API_CONFIG.OPENAI_API_KEY;
+        }
+
+        return null;
     },
 
     /**
